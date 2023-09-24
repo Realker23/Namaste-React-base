@@ -40,6 +40,15 @@ html{
     color: #414e21;
 }
 
+.loginButton{
+    padding: .5rem 2rem;
+    margin: 0 2rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+/* Body */
+
 .body-container{
     /* background-color: #414e21; */
     padding:2rem; 
@@ -121,7 +130,7 @@ html{
 }
 
 .resCard:hover{
-    border: 1px solid #fff;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
 }
 .resCard img{
     width: 100%;
@@ -148,3 +157,50 @@ html{
 .resCard p:nth-child(5){
     text-align: right;
 }
+
+/* Shimmer */
+.shimmerContainer{
+    
+    padding: 5rem 25rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.shimmerSearch{
+    width: 110rem;
+    max-width: 70%;
+    margin: 2rem auto 1rem;
+    background: #c2c0a2;
+    height: 4rem;
+    
+    border-radius: 1rem;
+}
+.shimmerCard{
+    width: 30rem;
+    border-radius: 5px;
+    height: 40rem; 
+    text-align: center;
+    padding: 1rem 2rem;
+    margin: 1rem 2rem;
+    background: #c2c0a2;
+    position: relative;
+}
+.shimmerTextarea1{
+    position: absolute;
+    background: #747370;
+    width: 20rem;
+    height: 2rem;
+    border-radius: 1rem;
+    bottom: 10rem;
+
+}
+.shimmerTextarea2{
+    position: absolute;
+    background: #747370;
+    width: 15rem;
+    height: 2rem;
+    border-radius: 1rem;
+    bottom: 5rem;
+    
+}
+

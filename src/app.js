@@ -4,18 +4,7 @@ import Header from "./components/Header";
 
 import Body from "./components/Body";
 
-/*
-Header
-  -Logo
-  -NavItem
-Body
-  -Search
-  -Restruant Container
-    -Restruant card
-Footer
-  -Copyright
-  -Links
-*/
+
 
 const AppLayout = () => (
   <div className="App">
