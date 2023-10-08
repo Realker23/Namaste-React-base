@@ -2,7 +2,7 @@ import {CDN_URL} from "../utils/constants";
 
 const ResCard = (props) => {
   const {resdata} = props;
-  // refactor our code
+  // destructure the data
   const {cloudinaryImageId, name, cuisines, avgRating, sla} = resdata.info;
   return (
     <div className="resCard">
