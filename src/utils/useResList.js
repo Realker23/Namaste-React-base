@@ -18,7 +18,7 @@ const useResList = () => {
 
     console.log(listOfRestaurants);
   };
-  return {listOfRestaurants};
+  return listOfRestaurants;
 };
 
 export default useResList;
