@@ -1,28 +1,15 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Shimmer from "./Shimmer";
 import {CDN_ITEM_IMAGE} from "../utils/constants";
-import {MENU_API} from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 import {useParams} from "react-router-dom";
 
 const ResMenu = () => {
-  const [resData, setResData] = useState(null);
   const [count, setCount] = useState(0);
 
   const {resId} = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const response = await fetch(
-      MENU_API + resId + "&catalog_qa=undefined&submitAction=ENTER"
-    );
-    const json = await response.json();
-    console.log(json.data);
-
-    setResData(json.data);
-  };
+  const resData = useRestaurantMenu(resId);
 
   if (resData === null) return <Shimmer />;
 
@@ -52,6 +39,7 @@ const ResMenu = () => {
       setCount(decrementCounter);
     }
   };
+
   const increment = () => {
     let incrementCounter = count + 1;
     {

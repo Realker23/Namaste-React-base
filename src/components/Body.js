@@ -3,33 +3,32 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 // import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useResList from "../utils/useResList";
 
 const Body = () => {
   // using state variable - using useState - hook
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
-  const [searchText, setSearchText] = useState("");
 
-  //it will render the body first and then call the callback function inside useEffect()- hook - bcoz we are using 2nd way to render the data ->  render-> api call -> rerender
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [searchText, setSearchText] = useState("");
 
   // console.log("body rendered");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  const fetchData = async () => {
-    const apiUrl = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await apiUrl.json();
+  const listOfRestaurants = useResList();
 
-    setListOfRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  setFilteredRestaurants(listOfRestaurants);
+  console.log(filteredRestaurants);
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus !== true) {
+    return (
+      <h1>
+        Hey buddy! Seems like you are offline, please check you internet
+        connection.
+      </h1>
     );
-    setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
+  }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
