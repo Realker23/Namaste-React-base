@@ -1,7 +1,6 @@
 import ResCard from "./ResCard";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-// import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
 

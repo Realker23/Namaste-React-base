@@ -1,7 +1,6 @@
 import logoImage from "../../images/logo.jpg"; //for importing any image dont miss the starting "./" else jsx will not be able to read
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import Grocery from "./Grocery";
 
 export const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");

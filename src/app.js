@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense, lazy} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,7 +8,11 @@ import Contact from "./components/Contact";
 import ResMenu from "./components/ResMenu";
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import ResMenu from "./components/ResMenu";
-import Grocery from "./components/Grocery";
+import Shimmer from "./components/Shimmer";
+// import Grocery from "./components/Grocery";
+
+// lazy Loading / On demand loading / chunking / code split
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => (
   <div className="App">
@@ -36,7 +40,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: <Grocery />,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",
