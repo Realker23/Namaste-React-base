@@ -3,29 +3,35 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import useResList from "../utils/useResList";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [
+    listOfRestaurants,
+    setListOfRestaurants,
+    filteredRestaurants,
+    setFilteredRestaurants,
+  ] = useResList();
 
-  const fetchData = async () => {
-    const apiUrl = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await apiUrl.json();
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-    setListOfRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
+  // const fetchData = async () => {
+  //   const apiUrl = await fetch(
+  //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  //   );
+  //   const json = await apiUrl.json();
+
+  //   setListOfRestaurants(
+  //     json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+  //   setFilteredRestaurants(
+  //     json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+  // };
 
   const onlineStatus = useOnlineStatus();
 
