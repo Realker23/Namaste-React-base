@@ -3,9 +3,10 @@ import Shimmer from "./Shimmer";
 import {CDN_ITEM_IMAGE} from "../utils/constants";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import {useParams} from "react-router-dom";
+import RestaurantCategory from "./RestaurantCategory";
 
 const ResMenu = () => {
-  const [count, setCount] = useState(0);
+  const [showIndex, setShowIndex] = useState(0);
 
   const {resId} = useParams();
 
@@ -14,13 +15,16 @@ const ResMenu = () => {
 
   if (resData === null) return <Shimmer />;
 
-  const {cards} = resData?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
-  console.log(cards);
+  const categories =
+    resData?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter((c) => {
+      return (
+        c?.card?.card?.["@type"] ==
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      );
+    });
 
   const {itemCards} =
     resData?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-
-  console.log(itemCards);
 
   const {
     name,
@@ -32,41 +36,39 @@ const ResMenu = () => {
     totalRatingsString,
   } = resData?.cards[0]?.card?.card?.info;
 
-  const decrement = () => {
-    let decrementCounter = count - 1;
-    if (decrementCounter < 0) {
-      setCount(0);
-    } else {
-      setCount(decrementCounter);
-    }
-  };
-
-  const increment = () => {
-    let incrementCounter = count + 1;
-    {
-      setCount(incrementCounter);
-    }
-  };
-
   return (
-    <div className="restaurantDetails">
-      <div className="resInfo">
+    <div className="w-6/12 m-auto p-4 bg-green-500 rounded-lg mt-8">
+      <div className="flex items-center justify-between mb-2 pb-2 border-b-[1px] border-dashed">
         <div>
-          <h1>{name}</h1>
-          <p>{cuisines.join(", ")}</p>
-          <p>{locality}</p>
+          <h1 className="text-2xl">{name}</h1>
+          <p className="text-lg">{cuisines.join(", ")}</p>
+          <p className="text-lg">{locality}</p>
         </div>
-        <div className="resRating">
+        <div className="flex flex-col items-center border-solid border-[1px] p-2 rounded-xl relative after:content-[''] after:bg-slate-400 after:w-4/5 after:h-[1px] after:top-[33px] after:absolute">
           <p>{avgRating} stars</p>
           <p>{totalRatingsString}</p>
         </div>
       </div>
-      <div className="resDeliveryInfo">
-        <span>{costForTwoMessage}</span>
-        <span>{sla.slaString}</span>
+      <div className="mb-8 border-b-[1px] pb-4">
+        <span className="text-lg pr-4">{costForTwoMessage}</span>
+        <span className="text-lg">{sla.slaString}</span>
       </div>
-
       <div>
+        {categories.map((c, index) => {
+          return (
+            <RestaurantCategory
+              key={c?.card?.card?.title}
+              header={c?.card.card}
+              showItems={index == showIndex}
+              setShowIndex={() => {
+                setShowIndex(index);
+              }}
+              setIndex={setShowIndex}
+            />
+          );
+        })}
+      </div>
+      {/* <div>
         {itemCards.map((item) => (
           <div className="restaurantItem" key={item.card.info.id}>
             <div className="itemInfo">
@@ -88,22 +90,10 @@ const ResMenu = () => {
                   e.onerror = null;
                 }}
               ></img>
-              <div className="btn-add">
-                <h2>Add</h2>
-                <div className="itemQuantity">
-                  <div className="decrease" onClick={decrement}>
-                    -
-                  </div>
-                  <div className="number">{count}</div>
-                  <div className="increase" onClick={increment}>
-                    +
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

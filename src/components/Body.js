@@ -1,5 +1,5 @@
-import ResCard from "./ResCard";
-import {useEffect, useState} from "react";
+import ResCard, {withFasterLable} from "./ResCard";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -34,6 +34,7 @@ const Body = () => {
   // };
 
   const onlineStatus = useOnlineStatus();
+  const ResCardFaster = withFasterLable(ResCard);
 
   if (onlineStatus !== true) {
     return (
@@ -48,10 +49,10 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body-container">
-      <div className="searchBox">
+    <div className="mt-8">
+      <div className="w-full flex items-center justify-evenly">
         <input
-          className="input"
+          className="w-3/4 h-8 border-gray-600 rounded-lg p-2  focus:outline-none  focus:border-2 focus:border-teal-500"
           type="text"
           placeholder="search for restraunt, cuisine and dishes"
           value={searchText}
@@ -60,7 +61,7 @@ const Body = () => {
           }}
         ></input>
         <button
-          className="btnSearch"
+          className="btnSearch outline-0 bg-gray-400 rounded-lg shadow-lg px-6 py-2 shadow-gray-400 hover:bg-gray-500"
           onClick={() => {
             const filteredList = listOfRestaurants.filter((res) =>
               res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -72,9 +73,9 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="filterSection">
+      <div className="flex justify-center items-center">
         <button
-          className="btnTopRated"
+          className="  bg-green-300 rounded-lg px-6 py-2 my-2 active:bg-green-400 "
           onClick={() => {
             const filteredList = filteredRestaurants.filter(
               (res) => res.info.avgRating >= 4
@@ -86,7 +87,7 @@ const Body = () => {
           Rating 4+
         </button>
       </div>
-      <div className="resContainer">
+      <div className="flex flex-wrap mt-8 justify-evenly">
         {/* <ResCard resdata={resList[0]} />
         <ResCard resdata={resList[1]} />
         <ResCard resdata={resList[2]} />
@@ -100,7 +101,11 @@ const Body = () => {
               key={restaurant.info.id}
               to={"/restaurants/" + restaurant.info.id}
             >
-              <ResCard resdata={restaurant} />
+              {restaurant.info.sla.deliveryTime < 25 ? (
+                <ResCardFaster resdata={restaurant} />
+              ) : (
+                <ResCard resdata={restaurant} />
+              )}
             </Link>
           ))}
       </div>
