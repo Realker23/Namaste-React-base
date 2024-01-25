@@ -1,13 +1,13 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import Shimmer from "./Shimmer";
-import {CDN_ITEM_IMAGE} from "../utils/constants";
+import UserContext from "../utils/UserContext";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import {useParams} from "react-router-dom";
 import RestaurantCategory from "./RestaurantCategory";
 
 const ResMenu = () => {
   const [showIndex, setShowIndex] = useState(0);
-
+  const {loggedinUser} = useContext(UserContext);
   const {resId} = useParams();
 
   //fetching restaurant menu data.
@@ -43,6 +43,7 @@ const ResMenu = () => {
           <h1 className="text-2xl">{name}</h1>
           <p className="text-lg">{cuisines.join(", ")}</p>
           <p className="text-lg">{locality}</p>
+          <p>User : {loggedinUser}</p>
         </div>
         <div className="flex flex-col items-center border-solid border-[1px] p-2 rounded-xl relative after:content-[''] after:bg-slate-400 after:w-4/5 after:h-[1px] after:top-[33px] after:absolute">
           <p>{avgRating} stars</p>

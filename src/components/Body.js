@@ -1,12 +1,14 @@
 import ResCard, {withFasterLable} from "./ResCard";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useResList from "../utils/useResList";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
+  const {loggedinUser, setUserName} = useContext(UserContext);
 
   const [
     listOfRestaurants,
@@ -72,6 +74,15 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          className=" h-8 border-gray-600 rounded-lg p-2  focus:outline-none  focus:border-2 focus:border-teal-500"
+          type="text"
+          placeholder="User name"
+          value={loggedinUser}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        ></input>
       </div>
       <div className="flex justify-center items-center">
         <button
