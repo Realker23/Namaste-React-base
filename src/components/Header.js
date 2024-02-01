@@ -1,4 +1,4 @@
-import logoImage from "../../images/logo.jpg"; //for importing any image dont miss the starting "./" else jsx will not be able to read
+// import logoImage from "../../images/logo.jpg"; //for importing any image dont miss the starting "./" else jsx will not be able to read
 import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import UserContext from "../utils/UserContext";
@@ -14,7 +14,10 @@ export const Header = () => {
 
   return (
     <div className="flex justify-between p-4 bg-white shadow-lg shadow-gray-600 mb-4">
-      <img className="w-40 h-40" src={logoImage} />
+      <img
+        className="mb-5 w-40 h-40 object-contain"
+        src="https://cdn.dribbble.com/users/2069096/screenshots/7755447/1-04.jpg"
+      />
       <div className="flex items-center">
         <ul className="flex ">
           <li className="mx-4 text-lg font-semibold p-2">
