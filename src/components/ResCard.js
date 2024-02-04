@@ -3,9 +3,15 @@ import {CDN_URL} from "../utils/constants";
 const ResCard = (props) => {
   const {resdata} = props;
   // destructure the data
+
+  // console.log(resdata);
+
   const {cloudinaryImageId, name, cuisines, avgRating, sla} = resdata.info;
   return (
-    <div className="w-64 h-[336px] p-2 mx-4 rounded-lg hover:scale-105 hover:bg-green-500 transition-all my-2">
+    <div
+      data-testid="resList"
+      className="w-64 h-[336px] p-2 mx-4 rounded-lg hover:scale-105 hover:bg-green-500 transition-all my-2"
+    >
       {/* <img
           src={
             "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +

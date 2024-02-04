@@ -1,15 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
 import {CDN_ITEM_IMAGE} from "../utils/constants";
 import {clearItem, removeItem} from "../utils/cartSlice";
+import ItemList from "./ItemList";
 
 const Cart = () => {
   const cartItem = useSelector((store) => {
-    console.log(store);
+    // console.log(store);
     return store.cart.items;
   });
   const dispatch = useDispatch();
   const deleteItem = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(removeItem(item));
   };
   console.log(cartItem);
@@ -36,7 +37,7 @@ const Cart = () => {
           </button>
         </div>
 
-        {cartItem.map((i) => {
+        {/* {cartItem.map((i) => {
           return (
             <div
               key={i.card.info.id}
@@ -65,7 +66,8 @@ const Cart = () => {
               </div>
             </div>
           );
-        })}
+        })} */}
+        <ItemList list={cartItem} />
       </div>
     );
   }

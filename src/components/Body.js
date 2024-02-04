@@ -55,6 +55,7 @@ const Body = () => {
       <div className="w-full flex items-center justify-evenly">
         <input
           className="w-3/4 h-8 border-gray-600 rounded-lg p-2  focus:outline-none  focus:border-2 focus:border-teal-500"
+          data-testid="searchInput"
           type="text"
           placeholder="search for restraunt, cuisine and dishes"
           value={searchText}
@@ -66,7 +67,12 @@ const Body = () => {
           className="btnSearch outline-0 bg-gray-400 rounded-lg shadow-lg px-6 py-2 shadow-gray-400 hover:bg-gray-500"
           onClick={() => {
             const filteredList = listOfRestaurants.filter((res) =>
-              res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              // res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              res.info.cuisines
+                .slice(0, 3)
+                .join(", ")
+                .toLowerCase()
+                .includes(searchText.toLowerCase())
             );
 
             setFilteredRestaurants(filteredList);
@@ -89,13 +95,13 @@ const Body = () => {
           className="  bg-green-300 rounded-lg px-6 py-2 my-2 active:bg-green-400 "
           onClick={() => {
             const filteredList = filteredRestaurants.filter(
-              (res) => res.info.avgRating >= 4
+              (res) => res.info.avgRating >= 4.5
             );
-            console.log(filteredList);
+            // console.log(filteredList);
             setFilteredRestaurants(filteredList);
           }}
         >
-          Rating 4+
+          Rating 4.5+
         </button>
       </div>
       <div className="flex flex-wrap mt-8 justify-evenly">

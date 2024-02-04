@@ -6,7 +6,6 @@ const ItemList = ({list}) => {
   const dispatch = useDispatch();
   const handleAddItem = (item) => {
     //dispatch an action
-
     dispatch(addItem(item));
   };
   return (
@@ -33,6 +32,7 @@ const ItemList = ({list}) => {
             </button>
             <button
               className="absolute border-[1px] rounded-lg border-black top-[85%] left-[60%] px-[6px] bg-green-100"
+              data-testid="addItem"
               onClick={() => handleAddItem(i)}
             >
               +

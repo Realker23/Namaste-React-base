@@ -33,7 +33,7 @@ export const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="mx-4 text-lg font-semibold p-2">
-            <Link to="/cart">Cart ({cartItem.length} items)</Link>
+            <Link to="/cart">Cart ({cartItem.length})</Link>
           </li>
           <li className="mx-4 text-lg font-semibold p-2">{loggedinUser}</li>
           <button

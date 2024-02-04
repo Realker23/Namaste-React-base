@@ -35,6 +35,6 @@ test("Check if how many input box is present", () => {
   const input = screen.getAllByRole("textbox");
   //   console.log(input);
 
-  //assertion
+  //assertion --
   expect(input.length).toBe(2);
 });
