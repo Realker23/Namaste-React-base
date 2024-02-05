@@ -8,7 +8,7 @@ const RestaurantCategory = ({header, showItems, setShowIndex, setIndex}) => {
 
   function enableToggle() {
     if (showItems) {
-      console.log("true");
+      // console.log("true");
       setIndex(null);
     } else {
       setShowIndex();
